@@ -3,9 +3,22 @@ package ch2
 import org.specs2.mutable._
 import org.specs2.matcher.DataTables
 
-import ch2.Maths.{fibonacci}
+import ch2.Maths.{fibonacci, factorial}
 
 class MathsSpec extends Specification with DataTables {
+
+  "factorial(n) should return n! for any n > 0" ! factorialExamples
+
+  def factorialExamples =
+    "n" | "expected_result" |
+     0  !   1               |
+     1  !   1               |
+     2  !   2               |
+     3  !   6               |
+     4  !  24               |> { (n, expected_result) =>
+      factorial(n) must beEqualTo(expected_result)
+    }
+
 
   "fibonacci(n)" should {
     "return 0 for n=0" in {
